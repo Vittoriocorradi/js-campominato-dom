@@ -6,6 +6,41 @@ FUNZIONI
 ----------
 */
 
+// Funzione difficoltà
+function difficultyChoice(difficulty) {
+    let cellNumber;
+    switch (difficulty) {
+        case 'hard':
+            cellNumber = 49;
+            break;
+        case 'medium':
+            cellNumber = 81;
+            break;
+        default:
+            cellNumber = 100;
+    }
+return cellNumber;
+}
+
+// Funzione numero causale
+function bombRandomNumber(cellNumber) {
+    return Math.floor(Math.random() * (cellNumber) + 1);
+  }
+
+// Funzione per generare le bombe
+function bombGenerator(cellNumber) {
+    let bombList = [];
+    while (bombList.length < 16) {
+        let bombNumber = bombRandomNumber(cellNumber);
+        if (!bombList.includes(bombNumber)) {
+            bombList.push(bombNumber);
+        }
+    }
+
+    return bombList;
+}
+
+
 // Funzione per creare una cella
 function myCreateElement(gameCell, className, difficultySetting, innerText) {
     const cell = document.createElement(gameCell);
@@ -26,21 +61,6 @@ function elementClick(cell, counter, className) {
     )
 }
 
-// Funzione difficoltà
-function difficultyChoice(difficulty) {
-    let cellNumber;
-    switch (difficulty) {
-        case 'hard':
-            cellNumber = 49;
-            break;
-        case 'medium':
-            cellNumber = 81;
-            break;
-        default:
-            cellNumber = 100;
-    }
-return cellNumber;
-}
 
 /*
 ----------
@@ -60,6 +80,9 @@ function() {
     const difficultySetting = document.getElementById('difficulty-setting').value;
     const cellNumber = difficultyChoice(difficultySetting);
 
+    // Generatore lista bombe
+    const bombList = bombGenerator(cellNumber);
+    
     // Pulizia della pagina
     gameContainer.innerHTML = '';
 
