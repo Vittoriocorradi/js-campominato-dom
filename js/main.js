@@ -50,15 +50,21 @@ function myCreateElement(gameCell, className, difficultySetting, innerText) {
     return cell;
 }
 
-// Funzione click sulla cella
-function elementClick(cell, counter, className) {
+// // Funzione click sulla cella
+// function elementClick(cell, counter, className) {
     
-    cell.addEventListener('click',
-    function() {
-        console.log(counter);
-        cell.classList.toggle(className);
-    }
-    )
+//     cell.addEventListener('click',
+//     function() {
+//         console.log(counter);
+//         cell.classList.add(className);
+//     }
+//     )
+// }
+
+function clickContinue(counter, element, className) {
+    console.log(counter);
+    element.classList.add(className);
+    return counter;
 }
 
 
@@ -82,15 +88,36 @@ function() {
 
     // Generatore lista bombe
     const bombList = bombGenerator(cellNumber);
-    
+
     // Pulizia della pagina
     gameContainer.innerHTML = '';
+    let pointsCounter = []; //Occhio
 
     // Ciclo per creare la griglia e assegnare event listener
     for (let i = 1; i <= cellNumber; i++) {
         const cellCreated = myCreateElement('div', 'cell', difficultySetting, i);
         gameContainer.append(cellCreated);
-        elementClick(cellCreated, i, 'clicked');
+        // elementClick(cellCreated, i, 'clicked');
+
+        cellCreated.addEventListener('click',
+        function() {
+            let msg = document.getElementById('point-counter');
+            if (!bombList.includes(i)) {
+                clickContinue(i, cellCreated, 'clicked-continue');
+                if (!pointsCounter.includes(i)) {
+                    pointsCounter.push(i);
+                }
+                if (cellNumber - bombList.length === pointsCounter.length) {
+                    msg.innerHTML = `Congratulazioni, hai vinto! il tuo punteggio è: ${pointsCounter.length}`;
+                } else {
+                    msg.innerHTML = `Il tuo punteggio è: ${pointsCounter.length}`;
+                }              
+            } else {
+                clickContinue(i, cellCreated, 'clicked-abort');
+                msg.innerHTML = `Mi dispiace, hai perso! Il tuo punteggio finale è: ${pointsCounter.length}`;
+            }
+        }
+        )
     }
 }
 )

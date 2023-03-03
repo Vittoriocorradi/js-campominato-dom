@@ -101,7 +101,7 @@ MAIN
 main {
     background-color: #7fffd4;
     flex-grow: 1;
-    padding: 8.125rem 0;
+    padding: 8.125rem 0 3.75rem;
 }
 
 main .container {
@@ -136,11 +136,20 @@ main .container {
     width: calc(100% / 7);
 }
 
-
-
-.clicked {
+.clicked-continue {
     background-color: #3399ff;
     color: #fff;
+}
+
+.clicked-abort {
+    background-color: #ad0e0e;
+    color: #fff;
+}
+
+main h2 {
+    text-align: center;
+    margin-top: 3.75rem;
+    font-size: 2em;
 }
 
 /*
