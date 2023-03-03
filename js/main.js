@@ -40,7 +40,6 @@ function bombGenerator(cellNumber) {
     return bombList;
 }
 
-
 // Funzione per creare una cella
 function myCreateElement(gameCell, className, difficultySetting, innerText) {
     const cell = document.createElement(gameCell);
@@ -50,21 +49,17 @@ function myCreateElement(gameCell, className, difficultySetting, innerText) {
     return cell;
 }
 
-// // Funzione click sulla cella
-// function elementClick(cell, counter, className) {
-    
-//     cell.addEventListener('click',
-//     function() {
-//         console.log(counter);
-//         cell.classList.add(className);
-//     }
-//     )
-// }
-
-function clickContinue(counter, element, className) {
-    console.log(counter);
+// Funzione azioni al click su casella corretta
+function clickContinue(counter, element, className, pointsCounter) {
     element.classList.add(className);
-    return counter;
+    if (!pointsCounter.includes(counter)) {
+        pointsCounter.push(counter);
+    }
+}
+
+// Funzione azioni al click su casella errata
+function clickAbort(element, className) {
+    element.classList.add(className);
 }
 
 
@@ -91,29 +86,35 @@ function() {
 
     // Pulizia della pagina
     gameContainer.innerHTML = '';
-    let pointsCounter = []; //Occhio
+
+    // array numeri corretti selezionati
+    let pointsCounter = [];
 
     // Ciclo per creare la griglia e assegnare event listener
     for (let i = 1; i <= cellNumber; i++) {
+        // Cella creata e appesa al container
         const cellCreated = myCreateElement('div', 'cell', difficultySetting, i);
         gameContainer.append(cellCreated);
-        // elementClick(cellCreated, i, 'clicked');
 
+        // Evento click
         cellCreated.addEventListener('click',
         function() {
-            let msg = document.getElementById('point-counter');
+            const msg = document.getElementById('point-counter');
+
+            // Condizione per vedere se il la cella contiene una bomba
             if (!bombList.includes(i)) {
-                clickContinue(i, cellCreated, 'clicked-continue');
-                if (!pointsCounter.includes(i)) {
-                    pointsCounter.push(i);
-                }
+                clickContinue(i, cellCreated, 'clicked-continue', pointsCounter);
+
+                // Condizione caso di vittoria
                 if (cellNumber - bombList.length === pointsCounter.length) {
                     msg.innerHTML = `Congratulazioni, hai vinto! il tuo punteggio è: ${pointsCounter.length}`;
+                // Condizione in caso di risposta corretta ma non vittoria
                 } else {
                     msg.innerHTML = `Il tuo punteggio è: ${pointsCounter.length}`;
-                }              
+                }   
+                           
             } else {
-                clickContinue(i, cellCreated, 'clicked-abort');
+                clickAbort(cellCreated, 'clicked-abort');
                 msg.innerHTML = `Mi dispiace, hai perso! Il tuo punteggio finale è: ${pointsCounter.length}`;
             }
         }
