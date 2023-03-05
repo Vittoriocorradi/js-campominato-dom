@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <!-- /Font Awesome -->
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- /Font -->
+
+    <title>Campo Minato</title>
+    <!-- Style -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="img/logo-boolean.png" alt="Logo Boolean">
+            <h1>Campo Minato</h1>
+        </div>
+        <div class="buttons">
+            <label for="difficulty-setting">Difficoltà:</label>
+            <select name="" id="difficulty-setting">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+            <button type="button" class="btn" id="generate-game">Play</button>
+        </div>
+    </header>
+    <!-- /Header -->
+    <!-- Main -->
+    <main>
+        <div class="container"></div>
+        <h2 id="point-counter"></h2>
+    </main>
+    <!-- /Main -->
+    <!-- Footer -->
+    <footer>
+        <span>Made with <i class="fa-solid fa-heart"></i> by <a href="https://boolean.careers/" target="_blank">Boolean</a></span>
+    </footer>
+    <!-- Footer -->
+
+    <!-- Modale -->
+    <div id="myModal" class="modal">
+        <!-- Contenuto modale -->
+        <div class="modal-content">
+            <div id="modal-msg"></div>
+            <button type="button" id="modal-button" class="btn">Gioca di nuovo!</button>
+        </div>  
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>
